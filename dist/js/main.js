@@ -7,7 +7,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   var myChart = Highcharts.chart('chart-container', {
     chart: {
-      type: 'bar',
+      type: 'column',
       styledMode: true,
       spacingBottom: 25,
       spacingRight: 100
@@ -15,29 +15,34 @@ document.addEventListener('DOMContentLoaded', function () {
     title: {
       text: null
     },
-    legend: {
-      align: 'right',
-      symbolRadius: 0,
-      verticalAlign: 'top',
-      x: 10,
-      itemMarginTop: -10
+    data: {
+      googleSpreadsheetKey: '1eM4oCpHRWZ5NJi2oCqpXyK2CsBJtWOOSpfgc-oSceoI',
+      googleSpreadsheetWorksheet: 1,
+      endColumn: 1
     },
-    xAxis: {
-      categories: ['Apples', 'Bananas', 'Oranges']
+    legend: {
+      enabled: false
     },
     yAxis: {
       title: false,
       labels: {
         useHTML: true,
         overflow: 'allow'
-      }
+      },
+      max: 25000
+    },
+    xAxis: {
+      tickInterval: 10
     },
     credits: {
       enabled: false
     },
     tooltip: {
       shadow: false,
-      padding: 10
+      padding: 10,
+      formatter: function formatter() {
+        return '<b>' + this.x + ':</b> $' + Math.round(this.y).toLocaleString();
+      }
     },
     responsive: {
       rules: [{
@@ -58,12 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }]
     },
-    series: [{
-      name: 'Jane',
-      data: [1, 6, 4]
-    }, {
-      name: 'John',
-      data: [5, 7, 3]
-    }]
+    series: [{}]
   });
 });
